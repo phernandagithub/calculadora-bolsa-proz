@@ -1,54 +1,88 @@
 body {
-    background-color: #e8f5e9;
-    font-family: Verdana, sans-serif;
-    color: #2e7d32;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  background-color: #e8f5e9;
+  font-family: Verdana, sans-serif;
+  color: #2e7d32;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 }
 
 .container {
-    background-color: #a5d6a7;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #66bb6a;
-    text-align: center;
+  background-color: #a5d6a7;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 4px #66bb6a;
+  text-align: center;
+  z-index: 1;
+  position: relative;
 }
 
-input, button {
-    padding: 10px;
-    margin-top: 10px;
-    font-family: Verdana, sans-serif;
-    text-align: center;
-    
+input,
+button {
+  padding: 10px;
+  margin-top: 10px;
+  font-family: Verdana, sans-serif;
+  text-align: center;
 }
 
 button {
-    background-color: #388e3c;
-    color: white;
-    border: none;
-    cursor: pointer;
+  background-color: #388e3c;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: #2e7d32;
+  background-color: #2e7d32;
 }
 
 .resultado {
-    margin-top: 20px;
-    font-size: 1.2em;
+  margin-top: 20px;
+  font-size: 1.2em;
 }
 
-/*  As setas, no campo de input (por ser numérico) estavam me incomodando. Segue abaixo a resolução: */
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
-input[type=number] {
-    appearance: textfield;
-    -moz-appearance: textfield;
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* container geral da onda animada */
+.wave-container {
+  position: fixed;        /* fixa o container na tela, mesmo se a página rolar */
+  bottom: 0;              /* alinha o container na base da tela */
+  left: 0;                /* alinha o lado esquerdo com a tela */
+  width: 100%;            /* faz o container ocupar toda a largura da tela */
+  height: 100px;          /* altura do container da onda */
+  overflow: hidden;       /* esconde qualquer parte da onda que ultrapasse a altura */
+  z-index: 0;             /* coloca o container atrás de outros elementos (como o .container principal) */
+}
+
+/* SVG da onda */
+.wave {
+  width: 200%;            /* o SVG ocupa o dobro da largura da tela para permitir o movimento contínuo */
+  height: 100%;           /* altura igual ao container pai (.wave-container) */
+  display: block;         /* remove espaços extras que poderiam surgir com display inline (comum em SVGs) */
+  animation: waveMove 6s linear infinite; 
+  /* aplica a animação chamada 'waveMove' que dura 6 segundos, com velocidade constante (linear) e se repete para sempre (infinite) */
+}
+
+/* animação da onda se movendo horizontalmente */
+@keyframes waveMove {
+  0% {
+    transform: translateX(0);       
+    /* a onda está na posição original (sem deslocamento) */
+  }
+  100% {
+    transform: translateX(-50%);    
+    /* a onda se move para a esquerda (eixo X / direção "invertida" = -)  em 50% da largura da onda (metade dos 200%), dando a ilusão de movimento contínuo da onda */
+  }
 }
