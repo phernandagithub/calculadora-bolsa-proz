@@ -1,46 +1,72 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <title>Calculadora de Pagamento - Bolsa PROZ</title>
-    <link rel="icon" href="calculadora.png" type="image/x-icon">
-
-    <link rel="stylesheet" href="style.css">    
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Calculadora de Pagamento - Bolsa PROZ</title>
+  <link rel="icon" href="calculadora.png" type="image/x-icon" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <div class="container">
-        <h1>Calculadora de Pagamento<br> da bolsa PROZ</h1>
-        <p>Insira os dados abaixo:<br>[Apenas números.]</p>
+  <div class="container">
+    <h1>Calculadora de Pagamento<br />da bolsa PROZ</h1>
+    <p>Insira os dados abaixo:<br />[Apenas números.]</p>
 
-        <input type="number" id="totalAulas" placeholder="*total de aulas do mês*">
-        <br>
-        <input type="number" id="faltas" placeholder="*número de faltas*">
-        <br>
-        <button onclick="calcularPagamento()">CALCULAR</button>
+    <input type="number" id="totalAulas" placeholder="*total de aulas do mês*" />
+    <br />
+    <input type="number" id="faltas" placeholder="*número de faltas*" />
+    <br />
+    <button onclick="calcularPagamento()">CALCULAR</button>
 
-        <div class="resultado" id="resultado"></div>
-    </div>
+    <div class="resultado" id="resultado"></div>
+  </div>
 
-    <script>
-        function calcularPagamento() {
-            const totalAulas = parseInt(document.getElementById('totalAulas').value);
-            const faltas = parseInt(document.getElementById('faltas').value);
-            const resultadoDiv = document.getElementById('resultado');
+  <!-- abaixo, segue conteúdo adaptado da aula de Willian Justen sobre SVG -->
+  <div class="wave-container">
+  <!-- container que envolve a onda SVG, usado para posicionamento/estilo -->
+  <!-- a tag <svg> é o elemento raiz para definir um gráfico SVG. todo o conteúdo gráfico (formas, textos, estilos etc) fica dentro dela -->
+      
+  <svg class="wave" viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <!-- elemento SVG que define uma área de desenho com largura 1200 e altura 100 -->
+    <!-- preserveAspectRatio="none" faz o SVG se esticar para preencher o contêiner sem manter a proporção -->
+    
+    <path
+      d="M0,30 C150,80 350,-20 600,30 C850,80 1050,-20 1200,30 L1200,100 L0,100 Z"
+      fill="#2e7d32"
+      fill-opacity="0.5"
+    />
+    <!--
+      elemento path que desenha a forma da onda:
+      M0,30         -> move para o ponto inicial (x=0, y=30)
+      C150,80 350,-20 600,30  -> curva cúbica de Bézier para (600,30) com pontos de controle (150,80) e (350,-20)
+      C850,80 1050,-20 1200,30 -> outra curva cúbica de Bézier para (1200,30) com pontos de controle (850,80) e (1050,-20)
+      L1200,100    -> linha reta até (1200,100)
+      L0,100       -> linha reta até (0,100)
+      Z            -> fecha o caminho, voltando ao ponto inicial (0,30)
+      
+      fill="#2e7d32" -> preenche a forma com a cor verde escura
+      fill-opacity="0.5" -> define a opacidade do preenchimento para 50%
+    -->
+  </svg>
 
-            if (isNaN(totalAulas) || isNaN(faltas) || totalAulas < 0 || faltas < 0 || faltas > totalAulas) {
-                resultadoDiv.innerText = "Por favor, insira valores válidos.";
-                return;
-            }
+  <script>
+    function calcularPagamento() {
+      const totalAulas = parseInt(document.getElementById("totalAulas").value);
+      const faltas = parseInt(document.getElementById("faltas").value);
+      const resultadoDiv = document.getElementById("resultado");
 
-            const aulasPresentes = totalAulas - faltas;
-            const total = aulasPresentes * 20;
+      if (isNaN(totalAulas) || isNaN(faltas) || totalAulas < 0 || faltas < 0 || faltas > totalAulas) {
+        resultadoDiv.innerText = "Por favor, insira valores válidos.";
+        return;
+      }
 
-            resultadoDiv.innerText = `O aluno esteve presente em ${aulasPresentes} aula(s) e deve receber R$ ${total},00.`;
-        }
-    </script>
+      const aulasPresentes = totalAulas - faltas;
+      const total = aulasPresentes * 20;
+
+      resultadoDiv.innerText = `O aluno esteve presente em ${aulasPresentes} aula(s) e deve receber R$ ${total},00.`;
+    }
+  </script>
 </body>
 </html>
