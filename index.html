@@ -4,52 +4,63 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Calculadora de Pagamento - Bolsa PROZ</title>
+  <title>Calculadora de Pagamento - Bolsas da PROZ</title>
   <link rel="icon" href="calculadora.png" type="image/x-icon" />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <div class="container">
-    <h1>Calculadora de Pagamento<br />da bolsa PROZ</h1>
-    <p>Insira os dados abaixo:<br />[Apenas números.]</p>
+  <!-- container geral que centraliza logos e a calculadora -->
+  <div class="main">
+    
+    <!-- container só pros logos, estando lado a lado -->
+    <div class="logos">
+      <img src="logo-proz.png" alt="Logo Proz" />
+      <img src="logo-tilhas-do-futuro.png" alt="Logo Trilhas do Futuro" />
+    </div>
 
-    <input type="number" id="totalAulas" placeholder="*total de aulas do mês*" />
-    <br />
-    <input type="number" id="faltas" placeholder="*número de faltas*" />
-    <br />
-    <button onclick="calcularPagamento()">CALCULAR</button>
+    <div class="container">
+      <h1>CALCULADORA DAS <br />BOLSAS DA PROZ</h1>
+      <p>Insira os dados abaixo:</p>
 
-    <div class="resultado" id="resultado"></div>
+      <input type="number" id="totalAulas" placeholder="AULAS TOTAIS DO MÊS" />
+      <br />
+      <input type="number" id="faltas" placeholder="NÚMERO DE FALTAS" />
+      <br />
+      <button onclick="calcularPagamento()">CALCULAR</button>
+
+      <div class="resultado" id="resultado"></div>
+    </div>
   </div>
 
   <!-- abaixo, segue conteúdo adaptado da aula de Willian Justen sobre SVG -->
   <div class="wave-container">
-  <!-- container que envolve a onda SVG, usado para posicionamento/estilo -->
-  <!-- a tag <svg> é o elemento raiz para definir um gráfico SVG. todo o conteúdo gráfico (formas, textos, estilos etc) fica dentro dela -->
+    <!-- container que envolve a onda SVG, usado para posicionamento/estilo -->
+    <!-- a tag <svg> é o elemento raiz para definir um gráfico SVG. todo o conteúdo gráfico (formas, textos, estilos etc) fica dentro dela -->
+        
+    <svg class="wave" viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <!-- elemento SVG que define uma área de desenho com largura 1200 e altura 100 -->
+      <!-- preserveAspectRatio="none" faz o SVG se esticar para preencher o contêiner sem manter a proporção -->
       
-  <svg class="wave" viewBox="0 0 1200 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-    <!-- elemento SVG que define uma área de desenho com largura 1200 e altura 100 -->
-    <!-- preserveAspectRatio="none" faz o SVG se esticar para preencher o contêiner sem manter a proporção -->
-    
-    <path
-      d="M0,30 C150,80 350,-20 600,30 C850,80 1050,-20 1200,30 L1200,100 L0,100 Z"
-      fill="#2e7d32"
-      fill-opacity="0.5"
-    />
-    <!--
-      elemento path que desenha a forma da onda:
-      M0,30         -> move para o ponto inicial (x=0, y=30)
-      C150,80 350,-20 600,30  -> curva cúbica de Bézier para (600,30) com pontos de controle (150,80) e (350,-20)
-      C850,80 1050,-20 1200,30 -> outra curva cúbica de Bézier para (1200,30) com pontos de controle (850,80) e (1050,-20)
-      L1200,100    -> linha reta até (1200,100)
-      L0,100       -> linha reta até (0,100)
-      Z            -> fecha o caminho, voltando ao ponto inicial (0,30)
-      
-      fill="#2e7d32" -> preenche a forma com a cor verde escura
-      fill-opacity="0.5" -> define a opacidade do preenchimento para 50%
-    -->
-  </svg>
+      <path
+        d="M0,30 C150,80 350,-20 600,30 C850,80 1050,-20 1200,30 L1200,100 L0,100 Z"
+        fill="#2e7d32"
+        fill-opacity="0.5"
+      />
+      <!--
+        elemento path que desenha a forma da onda:
+        M0,30         -> move para o ponto inicial (x=0, y=30)
+        C150,80 350,-20 600,30  -> curva cúbica de Bézier para (600,30) com pontos de controle (150,80) e (350,-20)
+        C850,80 1050,-20 1200,30 -> outra curva cúbica de Bézier para (1200,30) com pontos de controle (850,80) e (1050,-20)
+        L1200,100    -> linha reta até (1200,100)
+        L0,100       -> linha reta até (0,100)
+        Z            -> fecha o caminho, voltando ao ponto inicial (0,30)
+        
+        fill="#2e7d32" -> preenche a forma com a cor verde escura
+        fill-opacity="0.5" -> define a opacidade do preenchimento para 50%
+      -->
+    </svg>
+  </div>
 
   <script>
     function calcularPagamento() {
@@ -65,8 +76,25 @@
       const aulasPresentes = totalAulas - faltas;
       const total = aulasPresentes * 20;
 
-      resultadoDiv.innerText = `O aluno esteve presente em ${aulasPresentes} aula(s) e deve receber R$ ${total},00.`;
+      resultadoDiv.innerText = `O aluno esteve presente em ${aulasPresentes} aula(s) e deve receber R$${total},00.`;
     }
   </script>
+
+ <footer class="footer">
+    <p>Desenvolvido por <b>Fernanda Silva</b></p>
+    <ul class="social-links">
+      <li>
+        <a href="https://github.com/phernandagithub" target="_blank" rel="noopener noreferrer" aria-label="GitHub de Fernanda Silva">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/phernanda/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Fernanda Silva">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+      </li>
+    </ul>
+  </footer>
+
 </body>
 </html>
