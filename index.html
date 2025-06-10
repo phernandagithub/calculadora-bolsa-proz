@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pagamento do Aluno</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Calculadora de Pagamento<br> da bolsa PROZ</h1>
+        <p>Insira os dados abaixo:<br>[Apenas números.]</p>
+
+        <input type="number" id="totalAulas" placeholder="*total de aulas do mês*">
+        <br>
+        <input type="number" id="faltas" placeholder="*número de faltas*">
+        <br>
+        <button onclick="calcularPagamento()">CALCULAR</button>
+
+        <div class="resultado" id="resultado"></div>
+    </div>
+
+    <script>
+        function calcularPagamento() {
+            const totalAulas = parseInt(document.getElementById('totalAulas').value);
+            const faltas = parseInt(document.getElementById('faltas').value);
+            const resultadoDiv = document.getElementById('resultado');
+
+            if (isNaN(totalAulas) || isNaN(faltas) || totalAulas < 0 || faltas < 0 || faltas > totalAulas) {
+                resultadoDiv.innerText = "Por favor, insira valores válidos.";
+                return;
+            }
+
+            const aulasPresentes = totalAulas - faltas;
+            const total = aulasPresentes * 20;
+
+            resultadoDiv.innerText = `O aluno esteve presente em ${aulasPresentes} aula(s) e deve receber R$ ${total},00.`;
+        }
+    </script>
+</body>
+</html>

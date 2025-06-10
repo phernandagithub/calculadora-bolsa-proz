@@ -1,0 +1,54 @@
+body {
+    background-color: #e8f5e9;
+    font-family: Verdana, sans-serif;
+    color: #2e7d32;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #a5d6a7;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #66bb6a;
+    text-align: center;
+}
+
+input, button {
+    padding: 10px;
+    margin-top: 10px;
+    font-family: Verdana, sans-serif;
+    text-align: center;
+    
+}
+
+button {
+    background-color: #388e3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2e7d32;
+}
+
+.resultado {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+/*  As setas, no campo de input (por ser numérico) estavam me incomodando. Segue abaixo a resolução: */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
