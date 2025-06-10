@@ -2,19 +2,47 @@ body {
   background-color: #e8f5e9;
   font-family: Verdana, sans-serif;
   color: #2e7d32;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
-  overflow: hidden;
+  display: flex;             /* define o layout como flexível */
+  flex-direction: column;    /* empilha os filhos verticalmente */
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; removido para permitir rolagem com footer fixo */
+}
+
+/* novo contêiner geral (logos + calculadora) */
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;      
+  padding-top: 40px;      /* espaçamento entre o topo e os logos */
   position: relative;
+  z-index: 1;
+  flex: 1;                /* ocupa todo o espaço disponível */
+}
+
+/* container dos logos */
+.logos {
+  display: flex;
+  justify-content: center;     
+  align-items: center;         
+  gap: 50px;                   /* espaço entre as imagens */
+  margin-bottom: 80px;         /* distância maior até o container */
+  flex-wrap: wrap;             /* para ser responsivo em telas pequenas */
+}
+
+.logos img {
+  max-height: 90px;            /* tamanho máximo das imagens */
+  height: auto;
+  width: auto;
 }
 
 .container {
   background-color: #a5d6a7;
   padding: 30px;
   border-radius: 10px;
-  box-shadow: 0 0 4px #66bb6a;
+  box-shadow: 4px 4px 10px 3px #a6ada6;
   text-align: center;
   z-index: 1;
   position: relative;
@@ -28,6 +56,7 @@ button {
   text-align: center;
 }
 
+/* apenas o botão */
 button {
   background-color: #388e3c;
   color: white;
@@ -44,6 +73,7 @@ button:hover {
   font-size: 1.2em;
 }
 
+/* remove as setas dos campos number no Chrome e Firefox */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -55,24 +85,32 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+/* altera a cor do texto do placeholder - pseudo elemento */
+input::placeholder {
+  color: #4b6f4f;   /* placeholder mais escuro para melhor contraste */
+  opacity: 1;
+}
+
+/* conteúdo adaptado da aula sobre SVG do Willian Justen */
 /* container geral da onda animada */
 .wave-container {
   position: fixed;        /* fixa o container na tela, mesmo se a página rolar */
   bottom: 0;              /* alinha o container na base da tela */
   left: 0;                /* alinha o lado esquerdo com a tela */
+  right: 0;               /* alinha o lado direito com a tela */
   width: 100%;            /* faz o container ocupar toda a largura da tela */
-  height: 100px;          /* altura do container da onda */
+  height: 150px;          /* altura do container da onda */
   overflow: hidden;       /* esconde qualquer parte da onda que ultrapasse a altura */
   z-index: 0;             /* coloca o container atrás de outros elementos (como o .container principal) */
 }
 
 /* SVG da onda */
 .wave {
-  width: 200%;            /* o SVG ocupa o dobro da largura da tela para permitir o movimento contínuo */
-  height: 100%;           /* altura igual ao container pai (.wave-container) */
+  width: 300%;            /* o SVG ocupa o triplo da largura da tela para permitir o movimento contínuo */
+  height: 100%;           /* altura igual ao container "pai" (.wave-container) */
   display: block;         /* remove espaços extras que poderiam surgir com display inline (comum em SVGs) */
-  animation: waveMove 6s linear infinite; 
-  /* aplica a animação chamada 'waveMove' que dura 6 segundos, com velocidade constante (linear) e se repete para sempre (infinite) */
+  animation: waveMove 20s linear infinite; 
+  /* aplica a animação chamada 'waveMove' que dura 9 segundos, com velocidade constante (linear) e se repete para sempre (infinite) */
 }
 
 /* animação da onda se movendo horizontalmente */
@@ -83,6 +121,61 @@ input[type="number"] {
   }
   100% {
     transform: translateX(-50%);    
-    /* a onda se move para a esquerda (eixo X / direção "invertida" = -)  em 50% da largura da onda (metade dos 200%), dando a ilusão de movimento contínuo da onda */
+    /* a onda se move para a esquerda (eixo X / direção "invertida" = -) em 50% da largura da onda, dando a ilusão de movimento contínuo */
   }
 }
+
+/* responsividade para telas pequenas */
+@media (max-width: 600px) {
+  .logos {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .container {
+    width: 90%;
+    padding: 20px;
+  }
+}
+
+/* Footer fixo na base da tela */
+.footer {
+  color: #205923;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9em;
+  position: relative;
+  z-index: 2;                          /* acima da onda SVG */
+  margin-top: auto;                   /* empurra o footer para o fim da página */
+}
+
+.footer p {
+  margin: 0 0 8px 0;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: inline-flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.social-links li a {
+  color: #205923;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.3s ease;
+}
+
+.social-links li a:hover,
+.social-links li a:focus {
+  color: #254227;
+  outline: none;
+}
+
